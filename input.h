@@ -13,8 +13,8 @@ struct Text {
     size_t str_num;
 };
 
-String input_file(char* name_file);
+String input_file(const char* name_file);
 
-Text file_to_array(String file_str);
+Text split_file(String file_str);
 
 #endif //INPUT_H
