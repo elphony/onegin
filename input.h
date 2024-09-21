@@ -15,6 +15,6 @@ struct Text {
 
 String input_file(const char* name_file);
 
-Text split_file(String file_str);
+Text split_file(String* file_str);
 
 #endif //INPUT_H

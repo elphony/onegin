@@ -38,12 +38,12 @@ String input_file(const char* name_file) {
 // выделяем необходимое количество памяти на указатели
 // снова идем по массиву и ищем строки по \r и \n
 // каждую новую сохраняем в массив указателей вместе с длиной 
-Text split_file(String file_str) {
+Text split_file(String* file_str) {
     
     Text res = {nullptr, 0};
     
-    for (size_t i = 0; i < file_str.len; ++i) {
-        if (file_str.str[i] == '\n') {
+    for (size_t i = 0; i < file_str->len; ++i) {
+        if (file_str->str[i] == '\n') {
             res.str_num++;
         }
     }
@@ -51,7 +51,7 @@ Text split_file(String file_str) {
 
     res.str_array = (String*)calloc(res.str_num + 1, sizeof(String));
 
-    char* token = strtok(file_str.str, "\n");
+    char* token = strtok(file_str->str, "\n");
     size_t index = 0;
 
     while (token != NULL)

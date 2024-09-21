@@ -6,9 +6,13 @@ enum Mode {
     REVERSE = -1
 };
 
-int compare_str(String str1, String str2, Mode option);
+#include "input.h"
 
-void sort_str(Text text, Mode option);
+typedef int (*compare_func)(String* str1, String* str2, Mode option);
+
+int compare_str(String* str1, String* str2, Mode option);
+
+void sort_str(Text* text, Mode option);
 
 void swap(String* str1, String* str2);
 

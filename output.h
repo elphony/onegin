@@ -3,6 +3,6 @@
 
 #include "input.h"
 
-void output(Text str_array);
+void output(Text* str_array);
 
 #endif //OUTPUT_H
