@@ -30,7 +30,7 @@ int main() {
     Text onegin = split_file(&file); 
 
     //sort_str(&onegin, FORWARD);
-    q_sort(onegin.str_array, 0, onegin.str_num - 1, compare_str, FORWARD);
+    q_sort(onegin.str_array, 0, onegin.str_num - 1, sizeof(String), compare_reverse);
     
     output(&onegin);
 

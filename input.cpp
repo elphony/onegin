@@ -20,13 +20,14 @@ String input_file(const char* name_file) {
     assert(errno == 0 && "Information reading error");
 
     res.len = (size_t)file_stat.st_size;
-    res.str = (char*)calloc(res.len + 1, sizeof(char));
+    res.str = (char*)calloc(res.len + 2, sizeof(char));
     assert(res.str != nullptr && "Memory allocation error");
 
-    size_t count = fread(res.str, sizeof(char), res.len, f);
+    size_t count = fread(res.str + 1, sizeof(char), res.len, f);
     assert(count == res.len && "Error reading the file");
 
     res.str[res.len] = '\0';
+    res.str[0] = '\0';
 
     fclose(f);
 
@@ -51,7 +52,7 @@ Text split_file(String* file_str) {
 
     res.str_array = (String*)calloc(res.str_num + 1, sizeof(String));
 
-    char* token = strtok(file_str->str, "\n");
+    char* token = strtok(file_str->str + 1, "\n");
     size_t index = 0;
 
     while (token != NULL)

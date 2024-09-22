@@ -8,13 +8,17 @@ enum Mode {
 
 #include "input.h"
 
-typedef int (*compare_func)(String* str1, String* str2, Mode option);
+typedef int (*compare_func)(void* str1, void* str2);
+
+int compare_forward(void* str1, void* str2);
+
+int compare_reverse(void* str1, void* str2);
 
 int compare_str(String* str1, String* str2, Mode option);
 
 void sort_str(Text* text, Mode option);
 
-void swap(String* str1, String* str2);
+void swap(char* str1, char* str2, size_t size);
 
 void skip(String str1, String str2, size_t* i, size_t* j, Mode option);
 

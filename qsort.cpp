@@ -1,60 +1,81 @@
 #include "qsort.h"
 
-void q_sort(String* array, int left, int right, compare_func comparator, Mode option)
+void debug_output(int orig_left, int orig_right, int l, int r, String* pivot, String* array) {
+
+    for (int i = 0; i < orig_right - orig_left + 1; ++i) {
+        if (i + orig_left + array == pivot)
+            printf("[p->");
+        else if (i == l)
+            printf("[l->");
+        else if (i == r)
+            printf("[r->");
+        else
+            printf("[   ");
+        
+        printf("%2d] %s\n", i, array[orig_left + i].str);
+    }
+    printf("========\n");
+}
+
+#define HELP debug_output(l_hold, r_hold, left, right, pivot, array);
+
+void q_sort(void* array, size_t left, size_t right, size_t size, compare_func comparator)
 {
     if (left >= right)
         return;
 
-    String* pivot; 
-    int index;
-    int l_hold = left; 
-    int r_hold = right;
+    char* pivot = (char*)array + left * size; 
+    size_t l_hold = left; 
+    size_t r_hold = right;
 
-    pivot = (array + left);
-    printf("pivot = %s\n\n", *(array + left));
+    //HELP;
 
-    for (int i = 0; i < 8; ++i) {
-        printf("%s\n", (array + i)->str);
-    }
-
-    left++;
     while (left < right) 
     {
-        while ((comparator(&array[right], pivot, option) > 0) && (left < right))
+
+        //printf("===============WHILE STARTED==============\n");
+        while ((comparator((char*)array + right * size, pivot) > 0) && (left < right))
             right--; 
+        //HELP;
+
         if (left != right) 
         {
-            //printf("pivot = %s\n", )
-            //String* pointer = &array[left];
-            //pointer = &array[right];
-            swap(array + left, array + right);
-            left++; 
+            if (pivot == (char*)array + left * size)
+                pivot = (char*)array + right * size;
+            else if (pivot == (char*)array + right * size)
+                pivot = (char*)array + left * size;
+            
+            swap((char*)array + left * size, (char*)array + right * size, size);
+            left++;
         }
-        while ((comparator(&array[left], pivot, option) < 0) && (left < right))
+        //HELP;
+
+
+        while ((comparator((char*)array + left * size, pivot) < 0) && (left < right))
             left++; 
+        //HELP;
+
         if (left != right) 
         {
-            //String* pointer = &array[right];
-            //pointer = &array[left]; 
-            swap(array + right, array + left);
+            if (pivot == (char*)array + left * size)
+                pivot = (char*)array + right * size;
+            else if (pivot == (char*)array + right * size)
+                pivot = (char*)array + left * size;
+
+            swap((char*)array + right * size, (char*)array + left * size, size);
             right--; 
         }
+        //HELP;
+
     }
+    //printf("===============================STAGE ENDED============================\n");
 
-    printf("----------------------------------------------------------------------------------------------------------\n");
-
-    // String* pointer = &array[left];
-    // pointer = pivot;
-
-    swap(array + left, pivot);
-
-
-    index = left; 
+    size_t index = (pivot - (char*)array)/size; 
     left = l_hold;
     right = r_hold;
 
     if (left < index) 
-        q_sort(array, left, index - 1, comparator, option);
+        q_sort(array, left, index - 1, size, comparator);
     if (right > index)
-        q_sort(array, index + 1, right, comparator, option);
+        q_sort(array, index + 1, right, size, comparator);
 }
