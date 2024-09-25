@@ -1,6 +1,7 @@
 #ifndef INPUT_H
 #define INPUT_H
 
+#include <string.h>
 #include <stddef.h>
 
 struct String {

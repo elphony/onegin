@@ -2,6 +2,7 @@
 #define PARSE_CMD_ARG_H
 
 #include <stddef.h>
+#include <string.h>
 
 struct Command {
     const char* com;
