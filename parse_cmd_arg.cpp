@@ -8,7 +8,6 @@ int parse_cmd_line(const char* string_cmd, const Command options[], size_t len) 
     for(size_t i = 0; i < len; i++) {
         if (((string_cmd[0] == '-') && (strcmp(options[i].com, (string_cmd + 1)) == 0)) || 
             ((string_cmd[0] == '-') && (string_cmd[1] == '-') && (strcmp(options[i].com, (string_cmd + 2)) == 0))) {
-            //printf("%d", options[i].flag);
             return options[i].flag;
 
         }

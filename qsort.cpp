@@ -52,7 +52,6 @@ void q_sort(void* array, size_t left, size_t right, size_t size, compare_func co
         q_sort(array, index + 1, right, size, comparator);
 }
 
-// Меняем местами два указателя 
 void swap(char* str1, char* str2, size_t size) {
     for (size_t i = 0; i < size; ++i) {
         char tmp = *(str1 + i);
